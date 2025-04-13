@@ -1,0 +1,14 @@
+target/
+reports/*
+.DS_Store
+.idea
+.idea/*
+*.iml
+*.jar
+dependency-reduced-pom.xml
+pom.xml.bak
+# Ignore test framework related file, available in image
+test-cases/src/test/resources/features/support/*
+test-cases/pom.xml
+test-cases/reports/*
+test-cases/target

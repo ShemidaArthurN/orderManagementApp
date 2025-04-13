@@ -1,0 +1,5 @@
+application:
+  orders:
+    is-cache-templates: false
+
+debug: true

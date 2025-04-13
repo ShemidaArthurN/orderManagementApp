@@ -1,0 +1,10 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    hikari:
+      maximumPoolSize: 50
+  batch:
+    job:
+      enabled: false #this will stop it from triggering on startup, not disable the actual batch
+      initialize-schema: always

@@ -1,0 +1,4 @@
+orders:
+  input-folder: file:/Users/shemida/Downloads/Batches/input
+  archive-folder: file:/Users/shemida/Downloads/Batches/output
+  is-create-folders: false
