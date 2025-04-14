@@ -12,3 +12,4 @@ test-cases/src/test/resources/features/support/*
 test-cases/pom.xml
 test-cases/reports/*
 test-cases/target
+out/

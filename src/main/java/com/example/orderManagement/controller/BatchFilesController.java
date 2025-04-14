@@ -4,6 +4,7 @@ import com.example.orderManagement.configuration.OrdersConfigurationProps;
 import com.example.orderManagement.job.OrderManagementJobLauncher;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.SystemUtils;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,8 +37,13 @@ public class BatchFilesController {
         if (files == null || CollectionUtils.isEmpty(files))
             return ResponseEntity.badRequest().body("No files provided");
 
-        File targetDir = props.getInputFolder().toString().contains(":") ? new File(StringUtils.substringAfter(props.getInputFolder().toString(), ":")) : props.getInputFolder();
+        File targetDir = props.getInputFolder();
 
+        boolean windows = (getOperatingSystemSystemUtils().contains("Windows"));
+        if (!windows) {
+            targetDir = props.getInputFolder().toString().contains(":") ? new File(StringUtils.substringAfter(props.getInputFolder().toString(), ":")) : props.getInputFolder();
+        }
+        
         for (MultipartFile file : files) {
             String targetName = file.getOriginalFilename();
             try {
@@ -54,5 +60,11 @@ public class BatchFilesController {
             return ResponseEntity.ok(String.format("Started batch %s successfully.", jobExecution.getJobId()));
         }
         return ResponseEntity.accepted().build();
+    }
+
+    public String getOperatingSystemSystemUtils() {
+        String os = SystemUtils.OS_NAME;
+        System.out.println("Using SystemUtils: " + os);
+        return os;
     }
 }
